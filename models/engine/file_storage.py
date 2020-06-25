@@ -29,7 +29,6 @@ Public instance methods:
     def new(self, obj):
         '''sets in __objects the obj with key <obj class name>.id'''
         dicti = obj.to_dict()
-        dicti.pop("__class__")
         self.__objects.update({"[{}] ({})".format(obj.__class__.__name__,
                                                   obj.id): dicti})
 
@@ -44,13 +43,12 @@ Public instance methods:
         try:
             with open(self.__file_path, "r") as f:
                 lines = f.readlines()
+                lines = json.loads(lines[0])
                 for line in lines:
-                    print("Stuff and things" + line)
-                    print(type(line))
-                    js = json.loads(line)
-                    print(js)
-                    print(type(js))
-                    self.__objects.update(js)
+                    dict1 = lines.get(line)
+                    if '__class__' in dict1:
+                        dict1.pop('__class__')
+                self.__objects.update(lines)
                 f.close()
         except FileNotFoundError:
             pass

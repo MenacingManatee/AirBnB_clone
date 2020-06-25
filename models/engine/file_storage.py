@@ -29,31 +29,28 @@ Public instance methods:
     def new(self, obj):
         '''sets in __objects the obj with key <obj class name>.id'''
         dicti = obj.to_dict()
-        print(dicti)
-        print(obj.__class__.__name__)
+        dicti.pop("__class__")
         self.__objects.update({"[{}] ({})".format(obj.__class__.__name__,
-                                                obj.id): dicti})
+                                                  obj.id): dicti})
+
     def save(self):
         '''serializes __objects to the JSON file (path: __file_path)'''
-        try:
-            with open(self.__file_path, "a") as f:
-                f.write(json.dumps(self.__objects))
-                f.close()
-        except FileNotFoundError:
-            with open(self.__file_path, "w") as f:
-                f.write(json.dumps(self.__objects))
-                f.close()
+        with open(self.__file_path, "w") as f:
+            f.write(json.dumps(self.__objects))
+            f.close()
 
     def reload(self):
         '''deserializes the JSON file to __objects'''
         try:
             with open(self.__file_path, "r") as f:
-                stuff = f.read()
-                print("Stuff and things" + stuff)
-                print(type(stuff))
-                js = json.loads(stuff)
-                print(js)
-                print(type(js))
+                lines = f.readlines()
+                for line in lines:
+                    print("Stuff and things" + line)
+                    print(type(line))
+                    js = json.loads(line)
+                    print(js)
+                    print(type(js))
+                    self.__objects.update(js)
                 f.close()
         except FileNotFoundError:
             pass

@@ -27,7 +27,7 @@ Public instance methods:
 
     def new(self, obj):
         '''sets in __objects the obj with key <obj class name>.id'''
-        form = "[{}] ({})".format(obj.__class__.__name__, obj.id)
+        form = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects.update({form: obj})
 
     def save(self):

@@ -10,11 +10,13 @@ class BaseModel():
     '''class BaseModel defines common attributes/methods for other classes'''
 
     __check = {}
+
     def __init__(self, *args, **kwargs):
         if (kwargs is not None and kwargs != {}):
-             for keys in kwargs.keys():
+            for keys in kwargs.keys():
                 if keys == 'created_at' or keys == 'updated_at':
-                    dt = datetime.strptime(kwargs[keys], '%Y-%m-%dT%H:%M:%S.%f')
+                    dt = datetime.strptime(kwargs[keys], '%Y-%m-%dT%H:%M:%S.\
+                                                        %f')
                     setattr(self, keys, dt)
                 elif keys != "__class__":
                     setattr(self, keys, kwargs[keys])
@@ -32,7 +34,8 @@ class BaseModel():
 
     def to_dict(self):
         '''returns a dict containing all keys/values of __dict__ of instance'''
-        self_dict = {}
+        self_dict = dict(self.__dict__)
+
         for item in self.__dict__:
             if item == 'created_at' or item == 'updated_at':
                 dt = self.__dict__[item].strftime('%Y-%m-%dT%H:%M:%S.%f')
@@ -44,10 +47,10 @@ class BaseModel():
 
     def __str__(self):
         '''should print: [<class name>] (<self.id>) <self.__dict__>'''
-        return "[{}] ({}) {}".format(BaseModel.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}\
+                ".format(self.__class__.__name__, self.id, self.__dict__)
 
     def update_file(self):
         '''Updates the storage if the dictionary changes'''
         storage.new(self)
         self.__check = self.__dict__
-

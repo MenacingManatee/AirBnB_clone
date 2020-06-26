@@ -3,7 +3,6 @@
 '''
 import json
 
-
 class FileStorage():
     '''
 Private class attributes:
@@ -28,27 +27,33 @@ Public instance methods:
 
     def new(self, obj):
         '''sets in __objects the obj with key <obj class name>.id'''
-        dicti = obj.to_dict()
-        self.__objects.update({"[{}] ({})".format(obj.__class__.__name__,
-                                                  obj.id): dicti})
+        form = "[{}] ({})".format(obj.__class__.__name__, obj.id)
+        self.__objects.update({form: obj})
 
     def save(self):
         '''serializes __objects to the JSON file (path: __file_path)'''
         with open(self.__file_path, "w") as f:
-            f.write(json.dumps(self.__objects))
+            item = {}
+            for s, d in self.__objects.items():
+                if type(d) is not dict:
+                    item.update({s: d.to_dict()})
+                else:
+                    item.update({s: d})
+            string = json.dumps(item)
+            f.write(string)
             f.close()
 
     def reload(self):
         '''deserializes the JSON file to __objects'''
         try:
             with open(self.__file_path, "r") as f:
-                lines = f.readlines()
-                lines = json.loads(lines[0])
-                for line in lines:
-                    dict1 = lines.get(line)
-                    if '__class__' in dict1:
-                        dict1.pop('__class__')
-                self.__objects.update(lines)
+                lines = f.read()
+                lines = json.loads(lines)
+                for string, dic in lines.items():
+                    if '__class__' in dic:
+                        dic.pop('__class__')
+                    self.__objects.update({string: dic})
+                print("Ulines: {}".format(self.__objects))
                 f.close()
         except FileNotFoundError:
             pass

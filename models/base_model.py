@@ -9,6 +9,7 @@ from datetime import datetime
 class BaseModel():
     '''class BaseModel defines common attributes/methods for other classes'''
 
+    __check = {}
     def __init__(self, *args, **kwargs):
         if (kwargs is not None and kwargs != {}):
              for keys in kwargs.keys():
@@ -17,6 +18,7 @@ class BaseModel():
                     setattr(self, keys, dt)
                 elif keys != "__class__":
                     setattr(self, keys, kwargs[keys])
+                    storage.new(self)
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -43,4 +45,9 @@ class BaseModel():
     def __str__(self):
         '''should print: [<class name>] (<self.id>) <self.__dict__>'''
         return "[{}] ({}) {}".format(BaseModel.__name__, self.id, self.__dict__)
+
+    def update_file(self):
+        '''Updates the storage if the dictionary changes'''
+        storage.new(self)
+        self.__check = self.__dict__
 

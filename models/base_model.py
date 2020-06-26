@@ -32,7 +32,8 @@ class BaseModel():
 
     def to_dict(self):
         '''returns a dict containing all keys/values of __dict__ of instance'''
-        self_dict = {}
+        self_dict = dict(self.__dict__)
+
         for item in self.__dict__:
             if item == 'created_at' or item == 'updated_at':
                 dt = self.__dict__[item].strftime('%Y-%m-%dT%H:%M:%S.%f')

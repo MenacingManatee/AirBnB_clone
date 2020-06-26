@@ -2,6 +2,7 @@
 '''Entry point for command line'''
 import cmd
 from models.base_model import BaseModel
+from models.base_model import User
 from models import storage
 
 
@@ -26,6 +27,10 @@ class HBNBCommand(cmd.Cmd):
             instance = BaseModel()
             instance.save()
             print(instance.id)
+        elif args == 'User':
+            instance = User()
+            instance.save()
+            print(instance.id)
         else:
             print("** class doesn't exist **")
             return
@@ -36,27 +41,26 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         list_args = self.parse(args)
-        if list_args[0] != 'BaseModel':
+        if list_args[0] != 'BaseModel' or list_args[0] != 'User':
             print("** class doens't exist **")
             return
         if len(list_args) < 2:
             print('** instance id missing **')
             return
         dict_instances = storage.all()
-
         key = list_args[0] + '.' + list_args[1]
         if key in dict_instances:
             print(dict_instances[key])
         else:
             print('** no instance found **')
 
-    def do_delete(self, args):
+    def do_destroy(self, args):
         '''Deletes'''
         if args == '':
             print('** class name missing **')
             return
         list_args = self.parse(args)
-        if list_args[0] != 'BaseModel':
+        if list_args[0] != 'BaseModel' or list_args[0] != 'User':
             print("** class doens't exist **")
             return
         if len(list_args) < 2:
@@ -74,12 +78,43 @@ class HBNBCommand(cmd.Cmd):
         if args == '':
             print(storage.all())
             return
-        if args != 'BaseModel':
+        if args != 'BaseModel' or args != 'User':
             print("** class doesn't exist **")
         else:
             dict_instances = storage.all()
             list_instances = []
-#            for keys in dict_instances:
+            for keys in dict_instances:
+                if 'BaseModel' in keys:
+                    list_instances.append(str(keys))
+            print(list_instances)
+
+    def do_update(self, args):
+        '''updates'''
+        if args == '':
+            print("** class name missing **")
+            return
+        list_args = self.parse(args)
+        if list_args[0] != 'BaseModel' or list_args[0] != 'User':
+            print("** class doesn't exist **")
+            return
+        if len(list_args) < 2:
+            print("** instance id missing **")
+            return
+        if len(list_args) < 3:
+            print("** attribute name missing **")
+            return
+        if len(list_args) < 4:
+            print("** value missing **")
+            return
+
+        dict_instances = storage.all()
+        uuid = list_args[0] + '.' + list_args[1]
+        if uuid not in dict_instances:
+            print("** no instance found **")
+            return
+        list_args[3] = list_args[3][1:-1]
+        dict_instances[uuid].update({list_args[2]: list_args[3]})
+        storage.save()
 
     def parse(self, string):
         '''splits str into list of words'''

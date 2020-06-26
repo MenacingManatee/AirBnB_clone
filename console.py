@@ -2,7 +2,7 @@
 '''Entry point for command line'''
 import cmd
 from models.base_model import BaseModel
-from models.base_model import User
+from models.user import User
 from models import storage
 
 
@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         list_args = self.parse(args)
-        if list_args[0] != 'BaseModel' or list_args[0] != 'User':
+        if list_args[0] not in ['BaseModel', 'User']:
             print("** class doens't exist **")
             return
         if len(list_args) < 2:
@@ -60,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         list_args = self.parse(args)
-        if list_args[0] != 'BaseModel' or list_args[0] != 'User':
+        if list_args[0] not in ['BaseModel', 'User']:
             print("** class doens't exist **")
             return
         if len(list_args) < 2:
@@ -78,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
         if args == '':
             print(storage.all())
             return
-        if args != 'BaseModel' or args != 'User':
+        if args not in ['BaseModel', 'User']:
             print("** class doesn't exist **")
         else:
             dict_instances = storage.all()
@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         list_args = self.parse(args)
-        if list_args[0] != 'BaseModel' or list_args[0] != 'User':
+        if list_args[0] not in ['BaseModel', 'User']:
             print("** class doesn't exist **")
             return
         if len(list_args) < 2:

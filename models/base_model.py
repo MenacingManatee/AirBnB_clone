@@ -48,7 +48,7 @@ class BaseModel():
     def __str__(self):
         '''should print: [<class name>] (<self.id>) <self.__dict__>'''
         return "[{}] ({}) {}\
-                ".format(BaseModel.__name__, self.id, self.__dict__)
+                ".format(self.__class__.__name__, self.id, self.__dict__)
 
     def update_file(self):
         '''Updates the storage if the dictionary changes'''

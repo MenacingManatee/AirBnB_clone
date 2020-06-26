@@ -3,12 +3,20 @@
 import cmd
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City 
+from models.amenity import Amenity 
+from models.place import Place 
+from models.review import Review 
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     '''command interpreter'''
     prompt = "(hbnb) "
+    class_names = [
+        'BaseModel', 'User', 'State', 'City',
+        'Amenity', 'Place', 'Review']
 
     def do_EOF(self, args):
         '''Quit command to exit the program'''
@@ -23,12 +31,12 @@ class HBNBCommand(cmd.Cmd):
         if args == '':
             print('** class name missing **')
             return
-        if args == 'BaseModel':
-            instance = BaseModel()
-            instance.save()
-            print(instance.id)
-        elif args == 'User':
-            instance = User()
+        if args in self.class_names:
+            class_dict = {'User': User(), 'State': State(),
+                        'City': City(), 'Amenity': Amenity(),
+                        'Place': Place(), 'Review': Review(),
+                        'BaseModel': BaseModel()}
+            instance = class_dict[args]
             instance.save()
             print(instance.id)
         else:
@@ -41,7 +49,8 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         list_args = self.parse(args)
-        if list_args[0] not in ['BaseModel', 'User']:
+        class_name = list_args[0]
+        if class_name not in self.class_names:
             print("** class doens't exist **")
             return
         if len(list_args) < 2:
@@ -60,7 +69,8 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         list_args = self.parse(args)
-        if list_args[0] not in ['BaseModel', 'User']:
+        class_name = list_args[0]
+        if class_name not in self.class_names:
             print("** class doens't exist **")
             return
         if len(list_args) < 2:
@@ -78,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
         if args == '':
             print(storage.all())
             return
-        if args not in ['BaseModel', 'User']:
+        if args not in self.class_names:
             print("** class doesn't exist **")
         else:
             dict_instances = storage.all()
@@ -93,8 +103,9 @@ class HBNBCommand(cmd.Cmd):
         if args == '':
             print("** class name missing **")
             return
-        list_args = self.parse(args)
-        if list_args[0] not in ['BaseModel', 'User']:
+        list_args = self.parse([args])
+        class_name = list_args[0]
+        if class_name not in self.class_names:
             print("** class doesn't exist **")
             return
         if len(list_args) < 2:

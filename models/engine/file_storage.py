@@ -3,6 +3,7 @@
 '''
 import json
 
+
 class FileStorage():
     '''
 Private class attributes:
@@ -16,6 +17,7 @@ Public instance methods:
 '''
     __file_path = 'file.json'
     __objects = {}
+
     def __init__(self, __file_path=None):
         '''Initializes file path and objects provate attribute'''
         if __file_path is not None:
@@ -53,7 +55,6 @@ Public instance methods:
                     if '__class__' in dic:
                         dic.pop('__class__')
                     self.__objects.update({string: dic})
-                print("Ulines: {}".format(self.__objects))
                 f.close()
         except FileNotFoundError:
             pass

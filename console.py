@@ -18,6 +18,17 @@ class HBNBCommand(cmd.Cmd):
         'BaseModel', 'User', 'State', 'City',
         'Amenity', 'Place', 'Review']
 
+    def precmd(self, args):
+        '''Used to check for class.command methods before being sent to
+        command processing'''
+        if args != '':
+            check = args.split(".")
+            if check[0] in self.class_names:
+                if len(check) > 1 and check[1] == 'all()':
+                    self.do_all(check[0])
+                    return ''
+        return args
+
     def do_EOF(self, args):
         '''Quit command to exit the program'''
         exit()
@@ -27,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
         exit()
 
     def do_create(self, args):
-        '''Create instance of BaseModel, saves it to JSON file, prints id'''
+        '''Create instance of class, saves it to JSON file, prints id'''
         if args == '':
             print('** class name missing **')
             return
@@ -44,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
     def do_show(self, args):
-        '''Shows'''
+        '''Shows object based on class and id'''
         if args == '':
             print('** class name missing **')
             return
@@ -64,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
             print('** no instance found **')
 
     def do_destroy(self, args):
-        '''Deletes'''
+        '''Deletes an object based on class and id'''
         if args == '':
             print('** class name missing **')
             return
@@ -84,9 +95,13 @@ class HBNBCommand(cmd.Cmd):
             print('** no instance found **')
 
     def do_all(self, args):
-        '''prints all'''
+        '''prints all saved objects'''
         if args == '':
-            print(storage.all())
+            objs = storage.all()
+            pr = []
+            for item in objs:
+                pr.append({item: objs[item]})
+            print(pr)
             return
         if args not in self.class_names:
             print("** class doesn't exist **")
@@ -94,8 +109,8 @@ class HBNBCommand(cmd.Cmd):
             dict_instances = storage.all()
             list_instances = []
             for keys in dict_instances:
-                if 'BaseModel' in keys:
-                    list_instances.append(str(keys))
+                if args in keys:
+                    list_instances.append({keys: dict_instances[keys]})
             print(list_instances)
 
     def do_update(self, args):

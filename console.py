@@ -25,8 +25,7 @@ class HBNBCommand(cmd.Cmd):
             check = args.split(".")
             if check[0] in self.class_names:
                 if len(check) > 1 and check[1] == 'all()':
-                    self.do_all(check[0])
-                    return ''
+                    return "all {}".format(check[0])
         return args
 
     def do_EOF(self, args):

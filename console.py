@@ -26,7 +26,18 @@ class HBNBCommand(cmd.Cmd):
             if check[0] in self.class_names:
                 if len(check) > 1 and check[1] == 'all()':
                     return "all {}".format(check[0])
+                elif len(check) > 1 and check[1] == 'count()':
+                    return "count {}".format(check[0])
         return args
+
+    def do_count(self, args):
+        '''Counts the number of instances of an object'''
+        objs = storage.all()
+        count = 0
+        for item in objs:
+            if args in item:
+                count += 1
+        print(count)
 
     def do_EOF(self, args):
         '''Quit command to exit the program'''

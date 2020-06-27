@@ -43,11 +43,24 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
             return
         if args in self.class_names:
-            class_dict = {'User': User(), 'State': State(),
+            '''class_dict = {'User': User(), 'State': State(),
                           'City': City(), 'Amenity': Amenity(),
                           'Place': Place(), 'Review': Review(),
-                          'BaseModel': BaseModel()}
-            instance = class_dict[args]
+                          'BaseModel': BaseModel()}'''
+            if args == 'User':
+                instance = User()
+            elif args == 'State':
+                instance = State()
+            elif args == 'City':
+                instance = City()
+            elif args == 'Amenity':
+                instance = Amenity()
+            elif args == 'Place':
+                instance = Place()
+            elif args == 'Review':
+                instance = Review()
+            else:
+                instance = BaseModel()
             instance.save()
             print(instance.id)
         else:

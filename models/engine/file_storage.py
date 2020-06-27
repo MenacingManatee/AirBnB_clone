@@ -25,7 +25,15 @@ Public instance methods:
 
     def all(self):
         '''Returns a dictionary of all objects'''
-        return self.__objects
+        ret = {}
+        for s, d in self.__objects.items():
+            if type(d) is not dict:
+                d = d.to_dict()
+            c = d.copy()
+            if '__class__' in d:
+                c.pop('__class__')
+            ret.update({s: c})
+        return ret
 
     def new(self, obj):
         '''sets in __objects the obj with key <obj class name>.id'''

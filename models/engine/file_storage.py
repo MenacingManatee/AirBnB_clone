@@ -37,8 +37,11 @@ Public instance methods:
 
     def new(self, obj):
         '''sets in __objects the obj with key <obj class name>.id'''
-        form = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects.update({form: obj})
+        if type(obj) == dict:
+            self.__objects.update(obj)
+        else:
+            form = "{}.{}".format(obj.__class__.__name__, obj.id)
+            self.__objects.update({form: obj})
 
     def save(self):
         '''serializes __objects to the JSON file (path: __file_path)'''

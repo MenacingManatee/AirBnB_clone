@@ -28,6 +28,15 @@ class HBNBCommand(cmd.Cmd):
                     return "all {}".format(check[0])
                 elif len(check) > 1 and check[1] == 'count()':
                     return "count {}".format(check[0])
+                elif len(check) > 1 and 'update(' in check[1]:
+                    import re
+                    delims = "(", ")", ", "
+                    delimPatt = '|'.join(map(re.escape, delims))
+                    args = re.split(delimPatt, args)
+                    return ("update {} {} {} {}".format(check[0],
+                                                        args[1].strip('\"'),
+                                                        args[2].strip('\"\''),
+                                                        args[3].strip('\"\'')))
         return args
 
     def do_count(self, args):
@@ -161,12 +170,14 @@ class HBNBCommand(cmd.Cmd):
         if uuid not in dict_instances:
             print("** no instance found **")
             return
-        list_args[3] = list_args[3][1:-1]
         dict_instances[uuid].update({list_args[2]: list_args[3]})
+        storage.new(dict_instances)
         storage.save()
 
     def parse(self, string):
         '''splits str into list of words'''
+        string = str(string)
+        string = string.strip("[\"\']")
         list_args = string.split(' ')
         return list_args
 

@@ -9,7 +9,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models import storage
-
+import sys
 
 class HBNBCommand(cmd.Cmd):
     '''command interpreter'''
@@ -50,6 +50,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, args):
         '''Quit command to exit the program'''
+        if not sys.stdin.isatty():
+            print("")
         exit()
 
     def do_quit(self, args):

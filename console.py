@@ -30,6 +30,14 @@ class HBNBCommand(cmd.Cmd):
                     return "count {}".format(check[0])
                 elif len(check) > 1 and 'update(' in check[1]:
                     import re
+                    if '{' in check[1]:
+                        args = check[1].split(", ", 1)
+                        oid = args[0].split('(')
+                        d = args[1].strip(")")
+                        d = d.strip()
+                        d = d.replace('\'', '\"')
+                        return "update_dict {} {}".format(check[0] + '.' +
+                                                          "".join(oid[1:]), d)
                     delims = "(", ")", ", "
                     delimPatt = '|'.join(map(re.escape, delims))
                     args = re.split(delimPatt, args)
@@ -38,6 +46,28 @@ class HBNBCommand(cmd.Cmd):
                                                         args[2].strip('\"\''),
                                                         args[3].strip('\"\'')))
         return args
+
+    def do_update_dict(self, arg):
+        '''Updates an object using a dictionary'''
+        args = arg.split(' ', 1)
+        oid = args[0]
+        dict1 = args[1]
+        if dict1 is None or dict1 == '':
+            print("** Dictionary missing **")
+            return
+        instances = storage.all()
+        if oid not in instances:
+            print("** no instance found **")
+            return
+        import json
+        from datetime import datetime
+        dict1 = json.loads(dict1)
+        utime = str(datetime.now())
+        dict1['updated_at'] = utime
+        instances[oid].update(dict1)
+        storage.new(instances)
+        storage.save()
+        return
 
     def do_count(self, args):
         '''Counts the number of instances of an object'''
@@ -172,7 +202,9 @@ class HBNBCommand(cmd.Cmd):
         if uuid not in dict_instances:
             print("** no instance found **")
             return
-        dict_instances[uuid].update({list_args[2]: list_args[3]})
+        from datetime import datetime
+        dict_instances[uuid].update({list_args[2]: list_args[3].strip('\"'),
+                                     'updated_at': str(datetime.now())})
         storage.new(dict_instances)
         storage.save()
 

@@ -1,7 +1,7 @@
-# AirBnB Clone
+# AirBnb Clone - The Console
 
 ## About / synopsis
-This repo contains the console for an AirBnb clone.
+This repo contains the console for an AirBnb clone. The purpose of the console is manage object instances by interacting with a storage system.
 ## Built By
 * [Brett Davis] <email>
 * [Gabriel Abdul-Raheem] - gabrielabdul1@gmail.com
@@ -17,10 +17,12 @@ To enter into the console simply type `./console.py`
 
 ![examples](https://media.giphy.com/media/WOZPs2ZbdfJAlf5r8x/giphy.gif)
 
+*note commands work with all classes*
 #### Creating and deleting Users
 
 ![user\_example](https://media.giphy.com/media/LqJHkDaLghumvv7adO/giphy.gif)
 
+*note commands work with all classes*
 ### Project contents
 | Project Title | Short Description |
 | --- | --- |

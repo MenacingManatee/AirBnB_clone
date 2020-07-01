@@ -9,11 +9,11 @@ This repo contains the console for an AirBnb clone.
 * [Python]
 ### Usage:
 To enter into the console simply type `./console.py`
-![console usage](https://giphy.com/gifs/VEbc8ttuRnEYN9bRh2)
+![console usage](https://media.giphy.com/media/VEbc8ttuRnEYN9bRh2/giphy.gif)
 
 ###Examples:
 Creating and showing a model:
-![examples](https://giphy.com/gifs/WOZPs2ZbdfJAlf5r8x)
+![examples](https://media.giphy.com/media/WOZPs2ZbdfJAlf5r8x/giphy.gif)
 
 ### Project contents
 | Project Title | Short Description |

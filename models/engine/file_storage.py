@@ -32,6 +32,12 @@ Public instance methods:
             c = d.copy()
             if '__class__' in d:
                 c.pop('__class__')
+            form = '%Y-%m-%dT%H:%M:%S.%f'
+            from datetime import datetime
+            if 'created_at' in c:
+                c['created_at'] = datetime.strptime(c['created_at'], form)
+            if 'updated_at' in c:
+                c['updated_at'] = datetime.strptime(c['updated_at'], form)
             ret.update({s: c})
         return ret
 

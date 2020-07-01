@@ -19,6 +19,10 @@ class HBNBCommand(cmd.Cmd):
         'BaseModel', 'User', 'State', 'City',
         'Amenity', 'Place', 'Review']
 
+    def emptyline(self):
+        '''Redefines the default behavior when an empty line is sent'''
+        pass
+
     def precmd(self, args):
         '''Used to check for class.command methods before being sent to
         command processing'''

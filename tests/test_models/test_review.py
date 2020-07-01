@@ -4,8 +4,8 @@ import os
 import sys
 import unittest
 from datetime import datetime
-sys.path.insert(0, '..')
 from models.review import Review
+
 
 class TestReview(unittest.TestCase):
     '''class TestReview'''
@@ -38,7 +38,7 @@ class TestReview(unittest.TestCase):
         self.assertTrue('' == self.Review.user_id)
         self.assertTrue('' == self.Review.text)
         self.Review.place_id = 'test_id'
-        self.Review.user_id= 'user_id'
+        self.Review.user_id = 'user_id'
         self.Review.text = 'placeholder'
         self.assertNotEqual(self.Review.updated_at, self.Review.created_at)
         self.assertTrue(self.Review.place_id != '')
@@ -55,7 +55,7 @@ class TestReview(unittest.TestCase):
 
     def test_to_dict(self):
         '''method to test Review.to_dict()'''
-         # testing key equality
+        # testing key equality
         review_dict = Review().to_dict()
         my_dict = self.Review.to_dict()
         review_keys = review_dict.keys()

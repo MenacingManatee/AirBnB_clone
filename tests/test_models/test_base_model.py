@@ -5,7 +5,6 @@ import sys
 import pep8
 import unittest
 from datetime import datetime
-sys.path.insert(0, '..')
 from models.base_model import BaseModel
 
 

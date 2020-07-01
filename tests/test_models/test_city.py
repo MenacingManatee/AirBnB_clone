@@ -4,8 +4,8 @@ import os
 import sys
 import unittest
 from datetime import datetime
-sys.path.insert(0, '..')
 from models.city import City
+
 
 class TestCity(unittest.TestCase):
     '''class TestCity'''
@@ -50,7 +50,7 @@ class TestCity(unittest.TestCase):
 
     def test_to_dict(self):
         '''method to test City.to_dict()'''
-         # testing key equality
+        # testing key equality
         city_dict = City().to_dict()
         my_dict = self.City.to_dict()
         city_keys = city_dict.keys()

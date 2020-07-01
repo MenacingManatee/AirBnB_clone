@@ -4,8 +4,8 @@ import os
 import sys
 import unittest
 from datetime import datetime
-sys.path.insert(0, '..')
 from models.user import User
+
 
 class TestBase_Model(unittest.TestCase):
     '''class TestBase_Model'''
@@ -28,9 +28,9 @@ class TestBase_Model(unittest.TestCase):
 
     def test_attrs_initial(self):
         # testing initial condition of attrs
-        self.assertEqual('', self.User.email) 
-        self.assertEqual('', self.User.password) 
-        self.assertEqual('', self.User.first_name) 
+        self.assertEqual('', self.User.email)
+        self.assertEqual('', self.User.password)
+        self.assertEqual('', self.User.first_name)
         self.assertEqual('', self.User.last_name)
 
     def test_attrs_updating(self):

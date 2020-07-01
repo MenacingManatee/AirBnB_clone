@@ -4,8 +4,8 @@ import os
 import sys
 import unittest
 from datetime import datetime
-sys.path.insert(0, '..')
 from models.amenity import Amenity
+
 
 class TestAmenity(unittest.TestCase):
     '''class TestAmenity'''
@@ -46,7 +46,7 @@ class TestAmenity(unittest.TestCase):
 
     def test_to_dict(self):
         '''method to test Amenity.to_dict()'''
-         # testing key equality
+        # testing key equality
         amenity_dict = Amenity().to_dict()
         my_dict = self.Amenity.to_dict()
         amenity_keys = amenity_dict.keys()

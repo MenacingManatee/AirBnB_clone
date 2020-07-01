@@ -4,8 +4,8 @@ import os
 import sys
 import unittest
 from datetime import datetime
-sys.path.insert(0, '..')
 from models.state import State
+
 
 class TestState(unittest.TestCase):
     '''class TestState'''
@@ -42,7 +42,7 @@ class TestState(unittest.TestCase):
 
     def test_to_dict(self):
         '''method to test State.to_dict()'''
-         # testing key equality
+        # testing key equality
         state_dict = State().to_dict()
         my_dict = self.State.to_dict()
         state_keys = state_dict.keys()

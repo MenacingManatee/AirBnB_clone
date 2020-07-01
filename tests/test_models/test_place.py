@@ -4,8 +4,8 @@ import os
 import sys
 import unittest
 from datetime import datetime
-sys.path.insert(0, '..')
 from models.place import Place
+
 
 class TestPlace(unittest.TestCase):
     '''class TestPlace'''
@@ -43,12 +43,12 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(created_time != updated_time)
         self.assertIsInstance(self.Place.created_at, datetime)
         self.assertIsInstance(self.Place.updated_at, datetime)
-       
+
         # test empty values
         self.assertTrue('' == self.Place.name)
         self.assertTrue('' == self.Place.user_id)
         self.assertTrue('' == self.Place.description)
-        
+
         # assign attrs
         self.Place.city_id = 'test_city_id'
         self.Place.user_id = 'test_user_id'
@@ -87,7 +87,7 @@ class TestPlace(unittest.TestCase):
 
     def test_to_dict(self):
         '''method to test Place.to_dict()'''
-         # testing key equality
+        # testing key equality
         place_dict = Place().to_dict()
         my_dict = self.Place.to_dict()
         place_keys = place_dict.keys()

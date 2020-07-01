@@ -139,6 +139,7 @@ class HBNBCommand(cmd.Cmd):
         dict_instances = storage.all()
         key = list_args[0] + '.' + list_args[1]
         if key in dict_instances:
+            print("[{}] ({}) ".format(list_args[0], list_args[1]), end="")
             print(dict_instances[key])
         else:
             print('** no instance found **')

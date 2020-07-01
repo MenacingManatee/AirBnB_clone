@@ -13,11 +13,12 @@ To enter into the console simply type `./console.py`
 ![console usage](https://media.giphy.com/media/VEbc8ttuRnEYN9bRh2/giphy.gif)
 
 ### Examples:
-Creating and showing a model:
+#### Creating and showing a model:
 
 ![examples](https://media.giphy.com/media/WOZPs2ZbdfJAlf5r8x/giphy.gif)
 
-Creating and deleting Users
+#### Creating and deleting Users
+
 ![user\_example](https://media.giphy.com/media/LqJHkDaLghumvv7adO/giphy.gif)
 
 ### Project contents

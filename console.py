@@ -41,8 +41,9 @@ class HBNBCommand(cmd.Cmd):
                         d = args[1].strip(")")
                         d = d.strip()
                         d = d.replace('\'', '\"')
+                        oid[1] = oid[1].strip('"')
                         return "update_dict {} {}".format(check[0] + '.' +
-                                                          "".join(oid[1:]), d)
+                                                          "".join(oid[1]), d)
                     delims = "(", ")", ", "
                     delimPatt = '|'.join(map(re.escape, delims))
                     args = re.split(delimPatt, args)
@@ -56,18 +57,20 @@ class HBNBCommand(cmd.Cmd):
         '''Updates an object using a dictionary'''
         args = arg.split(' ', 1)
         oid = args[0]
+        #print(args, oid)
         dict1 = args[1]
         if dict1 is None or dict1 == '':
             print("** Dictionary missing **")
             return
         instances = storage.all()
         if oid not in instances:
+            #print("{} {} {}".format(oid, oid in instances, instances))
             print("** no instance found **")
             return
         import json
         from datetime import datetime
         dict1 = json.loads(dict1)
-        utime = str(datetime.now())
+        utime = datetime.now()
         dict1['updated_at'] = utime
         instances[oid].update(dict1)
         storage.new(instances)
@@ -217,7 +220,7 @@ class HBNBCommand(cmd.Cmd):
             return
         from datetime import datetime
         dict_instances[uuid].update({list_args[2]: list_args[3].strip('\"'),
-                                     'updated_at': str(datetime.now())})
+                                     'updated_at': datetime.now()})
         storage.new(dict_instances)
         storage.save()
 

@@ -11,6 +11,7 @@ from models.review import Review
 from models import storage
 import sys
 
+
 class HBNBCommand(cmd.Cmd):
     '''command interpreter'''
     prompt = "(hbnb) "

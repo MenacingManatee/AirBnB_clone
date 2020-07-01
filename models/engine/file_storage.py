@@ -41,6 +41,10 @@ Public instance methods:
             ret.update({s: c})
         return ret
 
+    def destroy(self, key):
+        '''Removes an item from the dictionary'''
+        self.__objects.pop(key)
+
     def new(self, obj):
         '''sets in __objects the obj with key <obj class name>.id'''
         if type(obj) == dict:

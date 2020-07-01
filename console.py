@@ -11,12 +11,17 @@ from models.review import Review
 from models import storage
 import sys
 
+
 class HBNBCommand(cmd.Cmd):
     '''command interpreter'''
     prompt = "(hbnb) "
     class_names = [
         'BaseModel', 'User', 'State', 'City',
         'Amenity', 'Place', 'Review']
+
+    def emptyline(self):
+        '''Redefines the default behavior when an empty line is sent'''
+        pass
 
     def precmd(self, args):
         '''Used to check for class.command methods before being sent to
@@ -134,6 +139,7 @@ class HBNBCommand(cmd.Cmd):
         dict_instances = storage.all()
         key = list_args[0] + '.' + list_args[1]
         if key in dict_instances:
+            print("[{}] ({}) ".format(list_args[0], list_args[1]), end="")
             print(dict_instances[key])
         else:
             print('** no instance found **')
@@ -155,6 +161,8 @@ class HBNBCommand(cmd.Cmd):
         key = list_args[0] + '.' + list_args[1]
         if key in dict_instances:
             dict_instances.pop(key)
+            storage.destroy(key)
+            storage.save()
         else:
             print('** no instance found **')
 
@@ -164,7 +172,9 @@ class HBNBCommand(cmd.Cmd):
             objs = storage.all()
             pr = []
             for item in objs:
-                pr.append({item: objs[item]})
+                l_a = item.split('.')
+                tmp = "[{}] ({}) {}".format(l_a[0], l_a[1], objs[item])
+                pr.append(tmp)
             print(pr)
             return
         if args not in self.class_names:
@@ -174,7 +184,10 @@ class HBNBCommand(cmd.Cmd):
             list_instances = []
             for keys in dict_instances:
                 if args in keys:
-                    list_instances.append({keys: dict_instances[keys]})
+                    l_a = keys.split('.')
+                    tmp = "[{}] ({}) {}".format(l_a[0], l_a[1],
+                                                dict_instances[keys])
+                    list_instances.append(tmp)
             print(list_instances)
 
     def do_update(self, args):

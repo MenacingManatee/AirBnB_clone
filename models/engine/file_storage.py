@@ -57,11 +57,30 @@ Public instance methods:
         '''serializes __objects to the JSON file (path: __file_path)'''
         with open(self.__file_path, "w") as f:
             item = {}
-            for s, d in self.__objects.items():
+            tmp = self.__objects.copy()
+            from datetime import datetime
+            for s, d in tmp.items():
                 if type(d) is not dict:
                     item.update({s: d.to_dict()})
                 else:
                     item.update({s: d})
+            for s, d in item.items():
+                form = ('%Y-%m-%dT%H:%M:%S.%f')
+                for it in d:
+                    if it == 'created_at':
+                        try:
+                            time = d['created_at'].strftime(form)
+                            d['created_at'] = time
+                            item.update({s: d})
+                        except AttributeError:
+                            pass
+                    if it == 'updated_at':
+                        try:
+                            time = d['updated_at'].strftime(form)
+                            d['updated_at'] = time
+                            item.update({s: d})
+                        except AttributeError:
+                            pass
             string = json.dumps(item)
             f.write(string)
             f.close()

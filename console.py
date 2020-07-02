@@ -51,6 +51,12 @@ class HBNBCommand(cmd.Cmd):
                                                         args[1].strip('\"'),
                                                         args[2].strip('\"\''),
                                                         args[3].strip('\"\'')))
+                elif len(check) > 1 and 'show(' in check[1]:
+                    args = check[1].split('"')
+                    return "show {} {}".format(check[0], args[1])
+                elif len(check) > 1 and 'destroy(' in check[1]:
+                    args = check[1].split('"')
+                    return "destroy {} {}".format(check[0], args[1])
         return args
 
     def do_update_dict(self, arg):

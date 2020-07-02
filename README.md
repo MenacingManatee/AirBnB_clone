@@ -1,4 +1,4 @@
-# AirnB Clone - The Console
+# AirBnB Clone - The Console
 
 ## About / synopsis
 This repo contains the console for an AirBnb clone. The purpose of the console is manage object instances by interacting with a storage system. The console allows a user the power to not only create new Users, Cities, States, Amenities, Places, and Reviews, but also to list, destroy, and update them with various commands. For a full list of usable console commands use the `help` command.

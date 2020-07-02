@@ -57,14 +57,12 @@ class HBNBCommand(cmd.Cmd):
         '''Updates an object using a dictionary'''
         args = arg.split(' ', 1)
         oid = args[0]
-        #print(args, oid)
         dict1 = args[1]
         if dict1 is None or dict1 == '':
             print("** Dictionary missing **")
             return
         instances = storage.all()
         if oid not in instances:
-            #print("{} {} {}".format(oid, oid in instances, instances))
             print("** no instance found **")
             return
         import json

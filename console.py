@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
         list_args = self.parse(args)
         class_name = list_args[0]
         if class_name not in self.class_names:
-            print("** class doens't exist **")
+            print("** class doesn't exist **")
             return
         if len(list_args) < 2:
             print('** instance id missing **')
@@ -153,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
         list_args = self.parse(args)
         class_name = list_args[0]
         if class_name not in self.class_names:
-            print("** class doens't exist **")
+            print("** class doesn't exist **")
             return
         if len(list_args) < 2:
             print('** instance id missing **')
@@ -204,6 +204,11 @@ class HBNBCommand(cmd.Cmd):
         if len(list_args) < 2:
             print("** instance id missing **")
             return
+        dict_instances = storage.all()
+        uuid = list_args[0] + '.' + list_args[1]
+        if uuid not in dict_instances:
+            print("** no instance found **")
+            return
         if len(list_args) < 3:
             print("** attribute name missing **")
             return
@@ -211,11 +216,6 @@ class HBNBCommand(cmd.Cmd):
             print("** value missing **")
             return
 
-        dict_instances = storage.all()
-        uuid = list_args[0] + '.' + list_args[1]
-        if uuid not in dict_instances:
-            print("** no instance found **")
-            return
         from datetime import datetime
         dict_instances[uuid].update({list_args[2]: list_args[3].strip('\"'),
                                      'updated_at': datetime.now()})

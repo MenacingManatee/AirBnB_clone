@@ -6,12 +6,11 @@
     border-radius: 4px;
     float: left;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 }
 .filter button {
     margin-right: 30px;
-    right: 30px;
     font-size: 18px;
     background-color: #FF5A5F;
     color: #FFFFFF;
@@ -27,68 +26,89 @@
     height: 100%;
     width: 25%;
     border-right: 1px solid #dddddd;
-    margin-left: 50px;
+    text-indent: 50px;
 }
-.locations h3 {
+.locations h3, .amenities h3 {
     font-weight: 600;
     margin-bottom: 0;
 }
-.locations h4 {
+.locations h4, .amenities h4 {
     font-weight: 400;
     font-size: 14px;
-    margin: 0;
+    margin-top: 0;
 }
 .locations ul {
-    float: left;
     list-style-type: none;
-    position: relative;
     display: none;
     width: 100%;
     background-color: #FAFAFA;
     border: 1px solid #dddddd;
     border-radius: 4px;
+    box-sizing: border-box;
+    text-indent: initial;
+    padding: 5%;
+}
+.locations li {
+    margin-left: 30px;
+}
+.locations ul ul li {
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
 }
 .locations:hover > ul {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 .locations ul:hover {
-    display: block;
+    display: flex;
 }
 .locations ul ul {
-    float: left;
-    display: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
     width: 100%;
     border: none;
     list-style-type: none;
-    margin: 0;
     padding: 0;
-    text-indent: 0;
+    margin-left: 0;
 }
 .amenities {
     height: 100%;
     width: 25%;
-}
-.amenities h3 {
-    font-weight: 600;
-    margin-bottom: 0;
-}
-.amenities h4 {
-    font-weight: 400;
-    font-size: 14px;
     margin: 0;
+    text-indent: 50px;
+    flex-grow: 3;
 }
 .amenities ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
     display: none;
     background-color: #FAFAFA;
     border: 1px solid #dddddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    font-weight: 400px;
+    padding: 5%;
+    padding-top: 10%;
+    text-indent: 35px;
+}
+.amenities li {
+    margin-left: -4px;
 }
 .amenities:hover > ul {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
 .amenities ul:hover {
-    display: block;
+    display: flex;
+}
+.spacer {
+    content: "";
+    flex-grow: 3;
+    width: 10%;
 }

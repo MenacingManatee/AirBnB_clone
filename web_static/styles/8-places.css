@@ -52,16 +52,16 @@ article .description {
     position: relative;
     flex-grow: 1;
 }
-#guest {
+.guest {
     background-image: url(../images/icon_group.png);
 }
-#rooms {
+.rooms {
     background-image: url(../images/icon_bed.png);
 }
-#bathr {
+.bathr {
     background-image: url(../images/icon_bath.png);
 }
-#text {
+.text {
     width: 100%;
     position: absolute;
     text-align: center;

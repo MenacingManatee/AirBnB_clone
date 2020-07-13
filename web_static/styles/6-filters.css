@@ -38,6 +38,7 @@
     margin-top: 0;
 }
 .locations ul {
+    position: relative;
     list-style-type: none;
     display: none;
     width: 100%;
@@ -83,6 +84,7 @@
     flex-grow: 3;
 }
 .amenities ul {
+    position: relative;
     list-style-type: none;
     display: none;
     background-color: #FAFAFA;
@@ -90,7 +92,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     width: 100%;
-    font-weight: 400px;
+    font-weight: 400;
     padding: 5%;
     padding-top: 10%;
     text-indent: 35px;
@@ -111,4 +113,11 @@
     content: "";
     flex-grow: 3;
     width: 10%;
+}
+.popover ul li {
+    margin: 0;
+    padding: 0;
+    align-self: flex-start;
+    text-align: left;
+    text-indent: 20px;
 }
